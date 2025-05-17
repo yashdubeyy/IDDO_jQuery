@@ -562,6 +562,17 @@
         </div>
     </footer>
 
+    <div class="hiddenform">
+        <button> <span class="cross fa fa-times"></span></button>
+        <form action="">
+            <label for="name">Name:<input type="text" id="name" required></label>
+            <label for="email">Email:<input type="email" id="email" required></label>
+            <label for="password">Password:<input type="password" id="password" required></label>
+            <br><br>
+            <button class="btn"> Sign Up </button>
+        </form>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(function () {
@@ -638,8 +649,8 @@
             // toggle menu list, working
             if (screen.width < 768) {
                 $(".collapse a").click(function () {
+                    $("header .menu").removeClass("active");
                     $(".collapse").slideUp();
-                    $("header .menu").toggleClass("active");
                 })
             }
 
@@ -647,7 +658,26 @@
             // signup tile 
             $(".signup").click(function () {
                 $("body").append(`<div class="overlay"></div>`);
+                $("body").append(`<div class="popup"></div>`);
+                $("body").css({ "overflow-y": "hidden" });
+                const form = $(".hiddenform").html();
+                $(".popup").append(form);
+                $(".popup input[type='text']").trigger("focus");
+
+
+                // cross, close the form
+                $(".popup .cross").click(function () {
+                    $(".popup").remove();
+                    $(".overlay").remove();
+                    $("body").css({ "overflow-y": "auto" });
+                })
+
+
             })
+
+
+
+
 
 
         });
